@@ -15,6 +15,7 @@ curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo 
 gh auth login
 
 # Get the repo
+cd ~
 gh repo clone aleksandrpak/piserver
 
 # Install Tailscale
@@ -24,6 +25,9 @@ curl -fsSL https://pkgs.tailscale.com/stable/raspbian/buster.list | sudo tee /et
 sudo apt-get update
 sudo apt-get install tailscale
 sudo tailscale up --advertise-exit-node --accept-dns=false
+
+# Create docker config folders
+mkdir -p ~/docker/pihole
 
 # Install Docker
 curl -fsSL https://get.docker.com -o install-docker.sh
