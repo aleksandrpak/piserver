@@ -26,8 +26,16 @@ sudo apt-get update
 sudo apt-get install tailscale
 sudo tailscale up --advertise-exit-node --accept-dns=false
 
+# Create mount folder and mount it on boot
+mkdir -p /mnt/usb/drive
+echo "/dev/sda1 /mnt/usb/media exfat nofail,uid=1000,gid=1000 0 0" | sudo tee -a /etc/fstab
+
 # Create docker config folders
 mkdir -p ~/docker/pihole
+mkdir -p ~/docker/nzbget
+mkdir -p ~/docker/sonarr
+mkdir -p ~/docker/radarr
+mkdir -p ~/docker/jellyfin
 
 # Install Docker
 curl -fsSL https://get.docker.com -o install-docker.sh
