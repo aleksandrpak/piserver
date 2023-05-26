@@ -70,5 +70,8 @@ docker run -d --name=jellyfin \
 	-v $DOCKER_DIR/jellyfin/config:/config \
 	-v $MEDIA_DIR/shows:/tv \
 	-v $MEDIA_DIR/movies:/movies \
+	--device=/dev/video10:/dev/video10 \
+	--device=/dev/video11:/dev/video11 \
+	--device=/dev/video12:/dev/video12 \
 	--restart unless-stopped \
 	lscr.io/linuxserver/jellyfin:latest
