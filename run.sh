@@ -86,3 +86,11 @@ docker run -d --name=homeassistant \
 	--network=host \
 	--restart=unless-stopped \
 	 ghcr.io/home-assistant/home-assistant:stable
+
+# Node-RED
+docker run -d --name=nodered \
+	-p 1880:1880 \
+	-e TZ=$TIMEZONE \
+	-v $DOCKER_DIR/nodered/data:/data \
+	--restart=unless-stopped \
+	nodered/node-red
