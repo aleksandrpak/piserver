@@ -75,3 +75,14 @@ docker run -d --name=jellyfin \
 	--device=/dev/video12:/dev/video12 \
 	--restart unless-stopped \
 	lscr.io/linuxserver/jellyfin:latest
+
+# Home assistant
+docker run -d --name=homeassistant \
+	-p 8123:8123 \
+	-e TZ=$TIMEZONE \
+	-v $DOCKER_DIR/homeassistant/config:/config \
+	--device=/dev/ttyACM0:/dev/ttyACM0 \
+	--privileged \
+	--network=host \
+	--restart=unless-stopped \
+	 ghcr.io/home-assistant/home-assistant:stable
