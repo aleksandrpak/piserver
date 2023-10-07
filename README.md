@@ -25,4 +25,4 @@ NOTE: Tested on Raspberry Pi OS 64-bit lite
   cd /home/alp/piserver/scripts && sudo python /home/alp/piserver/scripts/server.py &
   ```
 
-  Additional you need to set `PermitRootLogin yes` in `/etc/ssh/sshd_config` if using public keys
+  Additional you need to copy `known_hosts`, `id_rsa` and `id_rsa.pub` to `/root/.ssh/` as service will be running as `root`.
