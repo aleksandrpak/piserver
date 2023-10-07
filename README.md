@@ -22,5 +22,5 @@ NOTE: Tested on Raspberry Pi OS 64-bit lite
 
 * Modify `/etc/rc.local` by adding following line:
   ```shell
-  sudo python ~/piserver/scripts/server.py &
+  cd /home/alp/piserver/scripts && python /home/alp/piserver/scripts/server.py &
   ```
