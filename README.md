@@ -22,5 +22,7 @@ NOTE: Tested on Raspberry Pi OS 64-bit lite
 
 * Modify `/etc/rc.local` by adding following line:
   ```shell
-  cd /home/alp/piserver/scripts && python /home/alp/piserver/scripts/server.py &
+  cd /home/alp/piserver/scripts && sudo python /home/alp/piserver/scripts/server.py &
   ```
+
+  Additional you need to set `PermitRootLogin yes` in `/etc/ssh/sshd_config` if using public keys
