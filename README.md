@@ -20,3 +20,7 @@ NOTE: Tested on Raspberry Pi OS 64-bit lite
   ```
   This will start all Docker containers and they will restart on reboot
 
+* Modify /etc/rc.local by adding following line:
+  ```shell
+  sudo python ~/piserver/scripts/server.py &
+  ```
