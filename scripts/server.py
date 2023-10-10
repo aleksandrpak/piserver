@@ -6,43 +6,33 @@ hostName = "localhost"
 serverPort = 6969
 
 class MyServer(BaseHTTPRequestHandler):
-    def wake_pc(self):
-        completed = subprocess.run(['sh', './wake_pc.sh'])
-        return 200 if completed.returncode == 0 else 500
-
-    def sleep_pc(self):
-        completed = subprocess.run(['sh', './sleep_pc.sh'])
-        return 200 if completed.returncode == 0 else 500
-
-    def start_jupyter(self):
-        completed = subprocess.run(['sh', './start_jupyter.sh'])
-        return 200 if completed.returncode == 0 else 500
-
-    def stop_jupyter(self):
-        completed = subprocess.run(['sh', './stop_jupyter.sh'])
-        return 200 if completed.returncode == 0 else 500
+    def run(self, script):
+        completed = subprocess.run(['sh', script], text=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        return (200 if completed.returncode == 0 else 500, str(completed.stdout))
 
     def do_GET(self):
         if self.path == "/wake_pc":
-            self.send_response(self.wake_pc())
+            code, message = self.run('./wake_pc.sh')
         elif self.path == "/sleep_pc":
-            self.send_response(self.sleep_pc())
+            code, message = self.run('./sleep_pc.sh')
         elif self.path == "/start_jupyter":
-            self.send_response(self.start_jupyter())
+            code, message = self.run('./start_jupyter.sh')
         elif self.path == "/stop_jupyter":
-            self.send_response(self.stop_jupyter())
+            code, message = self.run('./stop_jupyter.sh')
         else:
             self.send_response(404)
             return
+        
+        self.send_response(code)
+        self.send_header('Content-Type', 'text/plain')
+
+        content_length = len(message.encode('utf-8'))
+        self.send_header('Content-Length', content_length)
+        self.end_headers()
+
+        self.wfile.write(message.encode('utf-8'))
 
 if __name__ == "__main__":        
     webServer = HTTPServer((hostName, serverPort), MyServer)
     print("Server started http://%s:%s" % (hostName, serverPort))
-
-    try:
-        webServer.serve_forever()
-    except KeyboardInterrupt:
-        pass
-
-    webServer.server_close()
-    print("Server stopped.")
+    webServer.serve_forever()
