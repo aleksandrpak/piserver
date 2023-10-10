@@ -15,6 +15,10 @@ class MyServer(BaseHTTPRequestHandler):
             code, message = self.run('./wake_pc.sh')
         elif self.path == "/sleep_pc":
             code, message = self.run('./sleep_pc.sh')
+        elif self.path == "/wake_nas":
+            code, message = self.run('./wake_nas.sh')
+        elif self.path == "/sleep_nas":
+            code, message = self.run('./sleep_nas.sh')
         elif self.path == "/start_jupyter":
             code, message = self.run('./start_jupyter.sh')
         elif self.path == "/stop_jupyter":
