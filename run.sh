@@ -7,17 +7,30 @@ DOCKER_DIR="$HOME/docker"
 PUID=1000
 PGID=1000
 
+# Nginx
+docker run -d --name nginx \
+	-p 443:443/tcp \
+	-p 443:443/udp \
+	-p 80:80/tcp \
+	-p 80:80/udp \
+	-v $DOCKER_DIR/nginx/nginx.conf:/etc/nginx/nginx.conf:ro \
+	-v $DOCKER_DIR/nginx/cert.pem:/etc/ssl/cert.pem:ro \
+	-v $DOCKER_DIR/nginx/key.pem:/etc/ssl/key.pem:ro \
+	-v $DOCKER_DIR/nginx/cloudflare.crt:/etc/ssl/cloudflare.crt:ro \
+	--restart=unless-stopped \
+	nginx
+
 # Pi-hole
 docker run -d --name pihole \
 	-p 53:53/tcp \
 	-p 53:53/udp \
-	-p 80:80/tcp \
+	-p 81:80/tcp \
 	-e TZ=$TIMEZONE \
 	-e WEBPASSWORD:$WEBPASSWORD \
 	-v $DOCKER_DIR/pihole/etc-pihole:/etc/pihole \
 	-v $DOCKER_DIR/pihole/etc-dnsmasq.d:/etc/dnsmasq.d \
 	--restart=unless-stopped \
-	pihole/pihole:latest
+	pihole/pihole
 
 # Node-RED
 docker run -d --name=nodered \
@@ -25,7 +38,7 @@ docker run -d --name=nodered \
 	-e TZ=$TIMEZONE \
 	-v $DOCKER_DIR/nodered/data:/data \
        	--restart=unless-stopped \
-	nodered/node-red:latest
+	nodered/node-red
 
 # ESPHome
 docker run -d --name=esphome \
@@ -38,7 +51,7 @@ docker run -d --name=esphome \
 	--privileged \
 	--network=host \
 	--restart=unless-stopped \
-	ghcr.io/esphome/esphome:latest
+	ghcr.io/esphome/esphome
 
 # Home assistant
 docker run -d --name=homeassistant \
@@ -60,4 +73,4 @@ docker run -d --name=duplicati \
 	-v $DOCKER_DIR/duplicati/data:/data \
 	-v $DOCKER_DIR:/source \
 	--restart=unless-stopped \
-	lscr.io/linuxserver/duplicati:latest
+	lscr.io/linuxserver/duplicati
