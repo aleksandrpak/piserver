@@ -26,7 +26,7 @@ docker run -d --name pihole \
 	-p 53:53/udp \
 	-p 81:80/tcp \
 	-e TZ=$TIMEZONE \
-	-e WEBPASSWORD:$WEBPASSWORD \
+	-e WEBPASSWORD:$PASSWORD \
 	-v $DOCKER_DIR/pihole/etc-pihole:/etc/pihole \
 	-v $DOCKER_DIR/pihole/etc-dnsmasq.d:/etc/dnsmasq.d \
 	--restart=unless-stopped \
