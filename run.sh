@@ -62,7 +62,7 @@ docker run -d --name=homeassistant \
 	--privileged \
 	--network=host \
 	--restart=unless-stopped \
-	 ghcr.io/home-assistant/home-assistant:stable
+	 ghcr.io/home-assistant/home-assistant:latest
 
 # Duplicati
 docker run -d --name=duplicati \
