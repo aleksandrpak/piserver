@@ -1,3 +1,3 @@
 #!/bin/sh
 set -x
-sudo etherwake -i eth0 70:8B:CD:A4:C8:3D
+sudo etherwake -i eth0 00:E0:4C:68:09:26
