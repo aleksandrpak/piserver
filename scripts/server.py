@@ -36,7 +36,7 @@ class MyServer(BaseHTTPRequestHandler):
         elif self.path == "/sleep_pc":
             code, message = self.run('./sleep_pc.sh')
         elif self.path == "/ping_pc":
-            return self.codeToJson(self.ping("192.168.68.71"))
+            return self.codeToJson(self.ping("192.168.68.72"))
         elif self.path == "/wake_nas":
             code, message = self.run('./wake_nas.sh')
         elif self.path == "/sleep_nas":
