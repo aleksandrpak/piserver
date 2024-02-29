@@ -26,3 +26,14 @@ NOTE: Tested on Raspberry Pi OS 64-bit lite
   ```
 
   Additional you need to copy `known_hosts`, `id_rsa` and `id_rsa.pub` to `/root/.ssh/` as service will be running as `root`.
+
+### Updating Docker
+
+- pull images
+```
+docker images | grep -v REPOSITORY | awk '{print $1}' | xargs -L1 docker pull
+```
+- restart all running
+```
+docker restart $(docker ps -q)
+```
