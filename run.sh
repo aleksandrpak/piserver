@@ -18,7 +18,7 @@ docker run -d --name nginx \
 	-v $DOCKER_DIR/nginx/key.pem:/etc/ssl/key.pem:ro \
 	-v $DOCKER_DIR/nginx/cloudflare.crt:/etc/ssl/cloudflare.crt:ro \
 	--restart=unless-stopped \
-	nginx
+	nginx:latest
 
 # Pi-hole
 docker run -d --name pihole \
@@ -30,7 +30,7 @@ docker run -d --name pihole \
 	-v $DOCKER_DIR/pihole/etc-pihole:/etc/pihole \
 	-v $DOCKER_DIR/pihole/etc-dnsmasq.d:/etc/dnsmasq.d \
 	--restart=unless-stopped \
-	pihole/pihole
+	pihole/pihole:latest
 
 # Node-RED
 docker run -d --name=nodered \
@@ -38,7 +38,7 @@ docker run -d --name=nodered \
 	-e TZ=$TIMEZONE \
 	-v $DOCKER_DIR/nodered/data:/data \
        	--restart=unless-stopped \
-	nodered/node-red
+	nodered/node-red:latest
 
 # ESPHome
 docker run -d --name=esphome \
@@ -51,7 +51,7 @@ docker run -d --name=esphome \
 	--privileged \
 	--network=host \
 	--restart=unless-stopped \
-	ghcr.io/esphome/esphome
+	ghcr.io/esphome/esphome:latest
 
 # Home assistant
 docker run -d --name=homeassistant \
@@ -73,4 +73,4 @@ docker run -d --name=duplicati \
 	-v $DOCKER_DIR/duplicati/data:/data \
 	-v $DOCKER_DIR:/source \
 	--restart=unless-stopped \
-	lscr.io/linuxserver/duplicati
+	lscr.io/linuxserver/duplicati:latest
