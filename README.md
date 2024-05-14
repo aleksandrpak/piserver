@@ -29,11 +29,15 @@ NOTE: Tested on Raspberry Pi OS 64-bit lite
 
 ### Updating Docker
 
-- pull images
+- delete all containers
 ```
-docker images | grep -v REPOSITORY | awk '{print $1}' | xargs -L1 docker pull
+docker rm -f $(docker ps -q)
 ```
-- restart all running
+- spin up all containers
 ```
-docker restart $(docker ps -q)
+./run.sh
+```
+- prune all unused images
+```
+docker image prune --all --force
 ```
