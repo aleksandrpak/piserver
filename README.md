@@ -29,15 +29,6 @@ NOTE: Tested on Raspberry Pi OS 64-bit lite
 
 ### Updating Docker
 
-- delete all containers
-```
-docker rm -f $(docker ps -q)
-```
-- spin up all containers
-```
-./run.sh
-```
-- prune all unused images
-```
-docker image prune --all --force
+```shell
+~/piserver/update.sh
 ```
